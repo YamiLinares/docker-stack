@@ -1,0 +1,40 @@
+# Dependencias del equipo local: la imagen instala las suyas con composer.lock.
+vendor
+node_modules
+
+# Secretos y configuración local: nunca entran en la imagen.
+.env
+.env.*
+!.env.example
+!.env.testing.example
+auth.json
+*.pem
+*.key
+
+# Archivos generados en ejecución (se recrean dentro del contenedor).
+storage/logs/*
+!storage/logs/.gitignore
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/testing/*
+bootstrap/cache/*.php
+public/storage
+public/hot
+.phpunit.cache
+.phpunit.result.cache
+
+# Control de versiones, editores y sistema operativo.
+.git
+.gitignore
+.gitattributes
+.editorconfig
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+*.log
+
+# El propio Dockerfile no se necesita dentro de la imagen.
+Dockerfile
+.dockerignore
