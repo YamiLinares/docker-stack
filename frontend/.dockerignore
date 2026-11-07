@@ -1,0 +1,31 @@
+# Dependencias y compilaciones del equipo local: la imagen genera las suyas.
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# Secretos y configuración local.
+.env
+.env.*
+*.pem
+
+# Pruebas y archivos que no intervienen en el build de producción.
+tests
+vitest.config.mts
+
+# Control de versiones, editores, registros y sistema operativo.
+.git
+.gitignore
+.vscode
+.idea
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+AGENTS.md
+CLAUDE.md
+Dockerfile
+.dockerignore

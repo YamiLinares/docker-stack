@@ -11,7 +11,8 @@ auth.json
 
 # --- Dependencias ---
 node_modules/
-vendor/
+# Solo el vendor de Composer: resources/views/vendor/ sí se versiona.
+/backend/vendor/
 
 # --- Resultados de compilación y cachés ---
 .next/
