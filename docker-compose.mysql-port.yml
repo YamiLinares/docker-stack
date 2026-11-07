@@ -1,0 +1,12 @@
+# OPCIONAL, solo para desarrollo: publica MySQL en 127.0.0.1 para conectarse
+# con una herramienta local (MySQL Workbench, DBeaver...). No se usa por defecto.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.mysql-port.yml up -d
+#
+# La red "data" es interna, así que se agrega MySQL a la red "backend" para
+# poder publicar el puerto. Nunca uses este archivo en producción.
+services:
+  mysql:
+    ports:
+      - "127.0.0.1:${MYSQL_HOST_PORT:-3307}:3306"
+    networks: [data, backend]
