@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HealthController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
@@ -27,6 +28,8 @@ Route::prefix('auth')->group(function () {
         Route::post('refresh', [AuthController::class, 'refresh'])->middleware('throttle:auth')->name('auth.refresh');
     });
 });
+
+Route::get('health', HealthController::class)->name('health');
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::get('products/{product}', [ProductController::class, 'show'])->whereNumber('product')->name('products.show');

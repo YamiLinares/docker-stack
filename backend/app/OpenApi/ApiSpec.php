@@ -52,5 +52,6 @@ MD,
 #[OA\Tag(name: 'Órdenes', description: 'Órdenes de compra del usuario autenticado.')]
 #[OA\Tag(name: 'Pagos', description: 'Pagos con Stripe (PaymentIntents) asociados a una orden.')]
 #[OA\Tag(name: 'Administración', description: 'Gestión de órdenes para administradores.')]
+#[OA\Tag(name: 'Sistema', description: 'Estado de la API y de la conexión con MySQL.')]
 #[OA\Tag(name: 'Webhooks', description: 'Eventos enviados por Stripe, verificados por firma.')]
 final class ApiSpec {}

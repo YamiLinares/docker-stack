@@ -74,7 +74,7 @@ class ApiDocumentationTest extends TestCase
 
     public function test_protected_operations_declare_bearer_security(): void
     {
-        $public = ['POST /api/auth/register', 'POST /api/auth/login', 'GET /api/products', 'GET /api/products/{product}', 'POST /api/webhooks/stripe'];
+        $public = ['GET /api/health', 'POST /api/auth/register', 'POST /api/auth/login', 'GET /api/products', 'GET /api/products/{product}', 'POST /api/webhooks/stripe'];
 
         foreach ($this->spec()['paths'] as $path => $operations) {
             foreach ($operations as $method => $operation) {

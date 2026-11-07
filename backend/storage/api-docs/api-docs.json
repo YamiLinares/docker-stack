@@ -451,6 +451,77 @@
                 ]
             }
         },
+        "/api/health": {
+            "get": {
+                "tags": [
+                    "Sistema"
+                ],
+                "summary": "Estado de la API y de la conexión con MySQL",
+                "description": "Ejecuta una consulta real en la base de datos. Responde 503 si MySQL no está disponible. No expone credenciales, hosts ni versiones.",
+                "operationId": "health",
+                "responses": {
+                    "200": {
+                        "description": "API y base de datos operativas.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok",
+                                            "enum": [
+                                                "ok",
+                                                "degraded"
+                                            ]
+                                        },
+                                        "service": {
+                                            "type": "string",
+                                            "example": "laravel-api"
+                                        },
+                                        "database": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "ok",
+                                                    "enum": [
+                                                        "ok",
+                                                        "unavailable"
+                                                    ]
+                                                },
+                                                "driver": {
+                                                    "type": "string",
+                                                    "example": "mysql"
+                                                },
+                                                "latency_ms": {
+                                                    "type": "number",
+                                                    "example": 1.4,
+                                                    "nullable": true
+                                                },
+                                                "products": {
+                                                    "description": "Productos no eliminados.",
+                                                    "type": "integer",
+                                                    "example": 21,
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "checked_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "La base de datos no responde (status = degraded)."
+                    }
+                }
+            }
+        },
         "/api/orders": {
             "get": {
                 "tags": [
@@ -2060,6 +2131,10 @@
         {
             "name": "Administración",
             "description": "Gestión de órdenes para administradores."
+        },
+        {
+            "name": "Sistema",
+            "description": "Estado de la API y de la conexión con MySQL."
         },
         {
             "name": "Webhooks",
