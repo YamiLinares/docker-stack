@@ -1,5 +1,10 @@
 /**
- * Portada (Server Component, ISR cada 5 minutos).
+ * Portada (Server Component renderizado en cada petición).
+ * En Docker la imagen se compila sin acceso a la API, así que la portada no
+ * se prerenderiza en el build: si lo hiciera, quedaría guardada con el aviso
+ * de error. Los productos siguen saliendo de la caché de datos de Next.js
+ * (5 minutos, etiqueta "products"), por lo que Laravel no recibe más tráfico.
+ *
  * El encabezado y el texto principal (elemento LCP) se envían en el HTML
  * inicial; los productos destacados se transmiten dentro de <Suspense> con un
  * esqueleto del mismo tamaño, así una API lenta no retrasa el LCP ni mueve el diseño.
@@ -12,7 +17,7 @@ import { userMessage } from "@/lib/api/errors";
 import { listProducts } from "@/lib/api/products";
 import { getStoreCurrency } from "@/lib/config";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (

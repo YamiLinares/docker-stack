@@ -34,6 +34,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Modelo de caché clásico de fetch (next.revalidate + tags) con ISR.
   cacheComponents: false,
+  // Docker: genera .next/standalone (server.js + solo los módulos que se usan
+  // en ejecución), así la imagen final no necesita el node_modules completo.
+  output: "standalone",
   poweredByHeader: false,
   images: {
     // Solo se optimizan las fotos locales de productos (sin parámetros extra):
