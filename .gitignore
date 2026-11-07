@@ -1,0 +1,59 @@
+# --- Variables de entorno y secretos (nunca se publican) ---
+.env
+.env.*
+!.env.example
+!backend/.env.testing.example
+*.pem
+*.key
+*.p12
+*.pfx
+auth.json
+
+# --- Dependencias ---
+node_modules/
+vendor/
+
+# --- Resultados de compilación y cachés ---
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.phpunit.cache/
+.phpunit.result.cache
+backend/public/storage
+backend/public/hot
+backend/public/build
+backend/storage/*.key
+backend/storage/pail
+
+# --- Bases de datos locales y volcados ---
+*.sqlite
+*.sqlite3
+*.sql.gz
+*.dump
+*.bak
+
+# --- Imágenes Docker exportadas ---
+*.tar
+*.tar.gz
+
+# --- Registros y temporales ---
+*.log
+npm-debug.log*
+tmp/
+.tmp/
+
+# --- Editores y sistema operativo ---
+.vscode/
+.idea/
+.fleet/
+.zed/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Instrucciones locales de herramientas ---
+AGENTS.md
+CLAUDE.md

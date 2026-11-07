@@ -1,0 +1,9 @@
+# Finales de línea LF en todo el repositorio: Dockerfiles, scripts de shell y
+# configuraciones se ejecutan dentro de contenedores Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
