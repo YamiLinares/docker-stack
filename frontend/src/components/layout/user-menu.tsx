@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { logoutAction } from "@/actions/auth";
 
-type Session = { authenticated: false } | { authenticated: true; name: string };
+type Session = { authenticated: false } | { authenticated: true; name: string; isAdmin?: boolean };
 
 export function UserMenu() {
   const pathname = usePathname();
@@ -39,6 +39,11 @@ export function UserMenu() {
 
   return (
     <div className="flex items-center gap-1">
+      {session.isAdmin && (
+        <Link href="/admin/productos" className="inline-flex h-10 items-center rounded-lg px-3 text-sm font-semibold text-brand-700 hover:bg-canvas">
+          Administrar
+        </Link>
+      )}
       <Link href="/mis-compras" className="inline-flex h-10 items-center rounded-lg px-3 text-sm font-semibold text-ink hover:bg-canvas">
         <span className="hidden max-w-32 truncate md:inline">Hola, {session.name.split(" ")[0]}</span>
         <span className="md:hidden">Mis compras</span>

@@ -17,6 +17,8 @@ export { TOKEN_COOKIE, USER_COOKIE };
 export interface SessionUser {
   name: string;
   email: string;
+  /** Solo para mostrar u ocultar enlaces; los permisos los decide Laravel. */
+  role: User["role"];
 }
 
 const baseCookie = {
@@ -33,7 +35,7 @@ export async function setSession(token: string, expiresInSeconds: number, user: 
   const maxAge = Math.max(60, Math.min(expiresInSeconds, 60 * 60 * 24 * 7));
   store.set(TOKEN_COOKIE, token, { ...baseCookie, maxAge });
   // Solo datos de presentación; la autorización siempre depende del token y de Laravel.
-  store.set(USER_COOKIE, JSON.stringify({ name: user.name, email: user.email } satisfies SessionUser), { ...baseCookie, maxAge });
+  store.set(USER_COOKIE, JSON.stringify({ name: user.name, email: user.email, role: user.role } satisfies SessionUser), { ...baseCookie, maxAge });
 }
 
 export async function clearSession() {
@@ -51,7 +53,8 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   if (!store.get(TOKEN_COOKIE)) return null;
   try {
     const parsed = JSON.parse(store.get(USER_COOKIE)?.value ?? "") as Partial<SessionUser>;
-    return typeof parsed.name === "string" && typeof parsed.email === "string" ? { name: parsed.name, email: parsed.email } : null;
+    if (typeof parsed.name !== "string" || typeof parsed.email !== "string") return null;
+    return { name: parsed.name, email: parsed.email, role: parsed.role === "admin" ? "admin" : "customer" };
   } catch {
     return null;
   }

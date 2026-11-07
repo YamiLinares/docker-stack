@@ -1,13 +1,13 @@
 /**
  * Proxy (Next.js 16): comprobación PRELIMINAR de las rutas privadas.
- * Sin cookie de sesión, /checkout y /mis-compras redirigen al login sin
+ * Sin cookie de sesión, /checkout, /mis-compras y /admin redirigen al login sin
  * renderizar nada. La autorización real la hacen la página (requireToken) y,
  * sobre todo, Laravel al validar el JWT en cada petición.
  */
 import { NextResponse, type NextRequest } from "next/server";
 import { TOKEN_COOKIE } from "@/lib/auth/session-cookie";
 
-const PRIVATE = ["/checkout", "/mis-compras"];
+const PRIVATE = ["/checkout", "/mis-compras", "/admin"];
 const GUEST_ONLY = ["/login", "/registro"];
 
 const matches = (path: string, list: string[]) => list.some((p) => path === p || path.startsWith(`${p}/`));
@@ -31,5 +31,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/checkout/:path*", "/mis-compras/:path*", "/login", "/registro"],
+  matcher: ["/checkout/:path*", "/mis-compras/:path*", "/admin/:path*", "/login", "/registro"],
 };

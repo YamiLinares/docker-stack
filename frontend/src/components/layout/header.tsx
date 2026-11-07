@@ -31,6 +31,9 @@ export function Header() {
           <Link href="/productos" className="hidden h-10 items-center rounded-lg px-3 text-sm font-semibold text-ink hover:bg-canvas sm:inline-flex">
             Catálogo
           </Link>
+          <Link href="/estado" className="hidden h-10 items-center rounded-lg px-3 text-sm font-semibold text-ink hover:bg-canvas sm:inline-flex">
+            Estado
+          </Link>
           <CartLink />
           <UserMenu />
         </nav>

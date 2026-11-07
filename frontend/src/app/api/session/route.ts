@@ -10,7 +10,7 @@ import { getSessionUser } from "@/lib/auth/session";
 export async function GET() {
   const user = await getSessionUser();
   return NextResponse.json(
-    user ? { authenticated: true, name: user.name } : { authenticated: false },
+    user ? { authenticated: true, name: user.name, isAdmin: user.role === "admin" } : { authenticated: false },
     { headers: { "Cache-Control": "private, no-store" } },
   );
 }

@@ -2,7 +2,7 @@
  * Destinos de redirección permitidos (evita redirecciones abiertas):
  * solo rutas internas de esta lista. Cualquier otro valor usa el destino por defecto.
  */
-const ALLOWED_PREFIXES = ["/checkout", "/mis-compras", "/carrito", "/productos"] as const;
+const ALLOWED_PREFIXES = ["/checkout", "/mis-compras", "/carrito", "/productos", "/admin"] as const;
 
 export function safeNextPath(value: unknown, fallback = "/mis-compras"): string {
   if (typeof value !== "string" || value.length === 0 || value.length > 200) return fallback;

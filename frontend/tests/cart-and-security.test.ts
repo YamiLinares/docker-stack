@@ -60,9 +60,10 @@ describe("safeNextPath", () => {
     expect(safeNextPath("/checkout")).toBe("/checkout");
     expect(safeNextPath("/mis-compras/7")).toBe("/mis-compras/7");
     expect(safeNextPath("/productos?q=libro")).toBe("/productos?q=libro");
+    expect(safeNextPath("/admin/productos")).toBe("/admin/productos");
   });
 
-  it.each(["https://evil.example", "//evil.example", "/\\evil.example", "javascript:alert(1)", "/admin", "/checkoutx", "", undefined])(
+  it.each(["https://evil.example", "//evil.example", "/\\evil.example", "javascript:alert(1)", "/administrador", "/checkoutx", "", undefined])(
     "rechaza %j",
     (value) => expect(safeNextPath(value)).toBe("/mis-compras"),
   );

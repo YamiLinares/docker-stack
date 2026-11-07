@@ -62,6 +62,36 @@ export const orderItemsSchema = z
 
 export const checkoutIdSchema = z.uuid();
 
+/** Producto (panel de administración). Mismas reglas que StoreProductRequest de Laravel. */
+export const productSchema = z.object({
+  sku: z
+    .string({ error: "Escribe el SKU." })
+    .trim()
+    .toUpperCase()
+    .min(1, "Escribe el SKU.")
+    .max(64, "Máximo 64 caracteres.")
+    .regex(/^[A-Z0-9-]+$/, "Usa solo letras, números y guiones (por ejemplo TEC-010)."),
+  name: z.string({ error: "Escribe el nombre." }).trim().min(2, "Mínimo 2 caracteres.").max(150, "Máximo 150 caracteres."),
+  description: z
+    .string()
+    .trim()
+    .max(5000, "Máximo 5000 caracteres.")
+    .transform((v) => (v === "" ? null : v)),
+  price: z
+    .string({ error: "Escribe el precio." })
+    .trim()
+    .regex(/^\d{1,8}(\.\d{1,2})?$/, "Precio no válido: usa punto decimal y hasta 2 decimales (por ejemplo 49.90).")
+    .refine((v) => Number(v) >= 0.5, "El precio mínimo es 0.50."),
+  stock: z.coerce
+    .number({ error: "Escribe el stock." })
+    .int("El stock debe ser un número entero.")
+    .min(0, "El stock no puede ser negativo.")
+    .max(1_000_000, "Máximo 1 000 000 unidades."),
+  is_active: z.boolean(),
+});
+
+export type ProductInput = z.output<typeof productSchema>;
+
 export function fieldErrorsOf(error: z.ZodError): Record<string, string[]> {
   return z.flattenError(error).fieldErrors as Record<string, string[]>;
 }
